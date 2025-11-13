@@ -9,10 +9,15 @@ def login():
     if request.method == 'POST':
         username = request.form.get("username")
         password = request.form.get("password")
-        
-        if username == "admin" and password =="123":
+        valid_users ={
+            'admin':'123',
+            'waniya':'pass',
+            'muazan':'word'
+        }
+        if username  in valid_users and password ==valid_users[username] :
             session["user"] = username
             return redirect(url_for("welcome"))
+        
         else:
             return render_template("login.html", error="Invalid username or password")
             # return Response(f"Invalid credentials. try again {username}",mimetype="text/plain")  #by default text / html 
